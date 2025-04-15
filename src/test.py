@@ -10,10 +10,8 @@ from train import get_image_transform
 from common import Config
 
 def main():
-    dataset = load_facad_dataset()
-    split = dataset.train_test_split(test_size=0.2, seed=42)
-    val_test = split["test"].train_test_split(test_size=0.5, seed=42)
-    test_raw = val_test["test"]
+    datasets = load_facad_dataset()
+    test_raw = datasets["test"]
 
     tokenizer = BertTokenizer.from_pretrained(TOKENIZER_NAME, do_lower_case=True)
     cfg = {

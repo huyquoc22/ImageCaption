@@ -178,13 +178,10 @@ def train(train_data, device="cuda", epochs=5, lr=5e-5, batch_size=16):
     return model
 
 if __name__ == "__main__":
-    dataset = load_facad_dataset()
-    split = dataset.train_test_split(test_size=0.2, seed=42)
-    val_test = split["test"].train_test_split(test_size=0.5, seed=42)
+    datasets = load_facad_dataset()
+    train_raw = datasets["train"]
+    val_raw = datasets["val"]
 
-    train_dataset = split["train"]
-    val_dataset = val_test["train"]
-    test_dataset = val_test["test"]
     cfg = {
         'crop_region_extend_in_datatransform': 4,
         'data_normalize': 'clip',
@@ -203,12 +200,11 @@ if __name__ == "__main__":
     tokenizer = BertTokenizer.from_pretrained(TOKENIZER_NAME, do_lower_case=True)
     transform = get_image_transform(cfg)
 
-    train_data = ImageCaptioningDataset(train_dataset, tokenizer, transform)
-    val_data = ImageCaptioningDataset(val_dataset, tokenizer, transform)
-    test_data = ImageCaptioningDataset(test_dataset, tokenizer, transform)
+    train_data = ImageCaptioningDataset(train_raw, tokenizer, transform)
+    val_data = ImageCaptioningDataset(val_raw, tokenizer, transform)
 
     model = train(train_data=train_data, device=DEVICE, epochs=EPOCHS, lr=LR, batch_size=BATCH_SIZE)
 
     print("\nEvaluation:")
-    result = evaluate_model(model, tokenizer, test_data, device=DEVICE)
+    result = evaluate_model(model, tokenizer, val_data, device=DEVICE)
     print(result)

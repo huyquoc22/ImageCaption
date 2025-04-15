@@ -5,12 +5,27 @@ import torch
 from transformers import BertTokenizer
 from config import jsonl_file, root
 
-def load_facad_dataset():
+def load_facad_dataset(split_ratio=(0.8, 0.1, 0.1), seed=42):
+
     dataset = load_dataset("json", data_files=jsonl_file)["train"]
     dataset = dataset.map(lambda x: {"image": os.path.join(root, x["image"])})
     dataset = dataset.cast_column("image", Image(decode=True))
-    return dataset
 
+    train_val_split = dataset.train_test_split(test_size=(1.0 - split_ratio[0]), seed=seed)
+    train_dataset = train_val_split["train"]
+
+    val_test_split = train_val_split["test"].train_test_split(
+        test_size=split_ratio[2] / (split_ratio[1] + split_ratio[2]),
+        seed=seed
+    )
+    val_dataset = val_test_split["train"]
+    test_dataset = val_test_split["test"]
+
+    return {
+        "train": train_dataset,
+        "val": val_dataset,
+        "test": test_dataset
+    }
 
 class ImageCaptioningDataset(Dataset):
     def __init__(self, dataset, tokenizer=None, image_transform=None):

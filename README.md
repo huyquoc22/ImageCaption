@@ -4,6 +4,8 @@
 
 `</br>` This repo contains some of the codes for this paper. `<br>`
 
+![1744748002004](image/model.png)
+
 # `<u>`**Dataset** `</u>`
 
 ## FAshion CAptioning Dataset
@@ -38,9 +40,15 @@ Year = {2020}
 }
 ```
 
-# **Requirements**
+# Installation
 
-**Install the libraries:**
+Download the source code
+
+```
+git clone https://github.com/huyquoc22/ImageCaption
+```
+
+Install the package
 
 ```
 pip install -r requirements.txt
@@ -51,7 +59,8 @@ pip install -r requirements.txt
 To train the model, run:
 
 ```
-python main.py
+cd src
+python train.py
 ```
 
 Once training is complete, run the following to evaluate the model on the test set:
@@ -60,29 +69,8 @@ Once training is complete, run the following to evaluate the model on the test s
 python test.py
 ```
 
+# Citation
 
-# **Results**
-
-</br>
-
-<table style = "width:100%">
-<tr style = "border-bottom:1px solid black">
-<th>
-Dataset
-</th>
-<th>
-F1-Rouge@1
-</th>
-<th>
-F1-Rouge@2
-</th>
-<th>
-F1-RougeL@2
-</th>
-<th>
-BlEU@1
-</th>
-<th>
-BlEU@2
-</th>
-</tr>
+```
+Citation
+```
