@@ -1,6 +1,8 @@
 </br>
 
-# ****MTFIC: enhanced fashion image captioning via multi-transformer architecture with contrastive and bidirectional encodings. The Visual Computer****
+# ****MTFIC: enhanced fashion image captioning via multi-transformer architecture with contrastive and bidirectional encodings.****
+
+# ****Submitted to The Visual Computer Journal****
 
 This repo contains some of the codes for this paper.
 
