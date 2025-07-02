@@ -1,3 +1,4 @@
+# **Introduction**
 </br>
 
 This is the source code of the published paper **EMTFIC: enhanced fashion image captioning via multi-transformer architecture with contrastive and bidirectional encodings on The Visual Computer Journal.**<br>
